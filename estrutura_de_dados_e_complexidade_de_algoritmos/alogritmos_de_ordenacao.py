@@ -30,7 +30,7 @@ def selection_sort(arr):
 def ler_numeros_por_linha(caminho):
     return np.loadtxt(caminho, dtype=int)
 
-def ordenar_e_cronometrar(arr, sort_function: callable):
+def ordenar_e_cronometrar(arr: list, sort_function: callable):
     inicio_etapa = time.time()
     sort_function(arr)
     fim_etapa = time.time()
@@ -52,10 +52,10 @@ for entrada in entradas_in:
     mostrar_msg_tempo("Tempo de leitura de dados", time.time() - inicio_leitura)
 
     # inicio da ordenação usando o Selection Sort
-    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), selection_sort()))
+    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), selection_sort))
 
     # inicio da ordenação usando o Insertion Sort
-    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), insertion_sort()))
+    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), insertion_sort))
 
     # inicio da ordenação usando Quick Sort
     # resultados.append(ordenar_e_cronometrar(entrada_array.copy(), quick_sort()))
