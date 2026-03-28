@@ -1,6 +1,7 @@
 import time
 import numpy as np
 import os
+import matplotlib.pyplot as plt
 
 def mostrar_msg_tempo(msg: str, tempo: float):
 	print(f"_____ {msg}: {tempo:.3f} segundos")
@@ -38,6 +39,26 @@ def ordenar_e_cronometrar(arr: list, sort_function: callable):
     # print("Array após a ordenação:", arr)
     return [sort_function.__name__, len(arr), fim_etapa - inicio_etapa]
 
+def plotar_resultados(resultados):
+    selection_q = [r[1] for r in resultados if r[0] == 'selection_sort']
+    selection_t = [r[2] for r in resultados if r[0] == 'selection_sort']
+    insertion_q = [r[1] for r in resultados if r[0] == 'insertion_sort']
+    insertion_t = [r[2] for r in resultados if r[0] == 'insertion_sort']
+
+    plt.figure()
+    if selection_q:
+        plt.scatter(selection_q, selection_t, color='blue', label='selection_sort')
+    if insertion_q:
+        plt.scatter(insertion_q, insertion_t, color='red', label='insertion_sort')
+
+    plt.xlabel('Quantidade')
+    plt.ylabel('Tempo (segundos)')
+    plt.title('Comparação de tempo por algoritmo de ordenação')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
 # Marca o início de toda a tarefa a ser cronometrada.
 inicio_tarefa = time.time()
 resultados = []
@@ -61,6 +82,7 @@ for entrada in entradas_in:
     # resultados.append(ordenar_e_cronometrar(entrada_array.copy(), quick_sort()))
 
 print("Resultados após a ordenação:", resultados)
+plotar_resultados(resultados)
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
 mostrar_msg_tempo("Tempo de execução total", fim_etapa-inicio_tarefa)
