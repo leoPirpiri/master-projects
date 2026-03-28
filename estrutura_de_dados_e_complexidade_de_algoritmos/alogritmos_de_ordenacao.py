@@ -37,9 +37,12 @@ def ordenar_e_cronometrar(arr: list, sort_function: callable):
     fim_etapa = time.time()
     mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
     # print("Array após a ordenação:", arr)
-    return [sort_function.__name__, len(arr), fim_etapa - inicio_etapa]
+    return [len(arr), fim_etapa - inicio_etapa]
 
 def plotar_resultados(resultados):
+    if not resultados:
+        print("Nenhum resultado para plotar.")
+        return
     selection_q = [r[1] for r in resultados if r[0] == 'selection_sort']
     selection_t = [r[2] for r in resultados if r[0] == 'selection_sort']
     insertion_q = [r[1] for r in resultados if r[0] == 'insertion_sort']
@@ -61,7 +64,9 @@ def plotar_resultados(resultados):
 
 # Marca o início de toda a tarefa a ser cronometrada.
 inicio_tarefa = time.time()
-resultados = []
+algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
+                           insertion_sort.__name__: 'green'}
+resultados = {}
 
 # Leitura dos arquivos de entrada.
 diretorio = './instancias-num/' # Diretório atual
@@ -72,17 +77,13 @@ for entrada in entradas_in:
     #print("Array antes da ordenação:", entrada_array)
     mostrar_msg_tempo("Tempo de leitura de dados", time.time() - inicio_leitura)
 
-    # inicio da ordenação usando o Selection Sort
-    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), selection_sort))
-
-    # inicio da ordenação usando o Insertion Sort
-    resultados.append(ordenar_e_cronometrar(entrada_array.copy(), insertion_sort))
-
-    # inicio da ordenação usando Quick Sort
-    # resultados.append(ordenar_e_cronometrar(entrada_array.copy(), quick_sort()))
+    for algoritmo in algoritmos_de_ordenacao.keys():
+        if algoritmo not in resultados.keys():
+            resultados[algoritmo] = []
+        resultados[algoritmo].append(ordenar_e_cronometrar(entrada_array.copy(), eval(algoritmo)))
 
 print("Resultados após a ordenação:", resultados)
-plotar_resultados(resultados)
+# plotar_resultados(resultados)
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
 mostrar_msg_tempo("Tempo de execução total", fim_etapa-inicio_tarefa)
