@@ -3,6 +3,13 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
+# algoritmos de ordenação a serem testados.
+# Antes de inserir o algoritmo de ordenação ao dicionário,
+# certifique-se de que a função do algoritmo de ordenação esteja definida no código.
+# A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
+algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
+                           insertion_sort.__name__: 'green'}
+
 def mostrar_msg_tempo(msg: str, tempo: float):
 	print(f"_____ {msg}: {tempo:.3f} segundos")
 
@@ -43,16 +50,10 @@ def plotar_resultados(resultados):
     if not resultados:
         print("Nenhum resultado para plotar.")
         return
-    selection_q = [r[1] for r in resultados if r[0] == 'selection_sort']
-    selection_t = [r[2] for r in resultados if r[0] == 'selection_sort']
-    insertion_q = [r[1] for r in resultados if r[0] == 'insertion_sort']
-    insertion_t = [r[2] for r in resultados if r[0] == 'insertion_sort']
-
+    
     plt.figure()
-    if selection_q:
-        plt.scatter(selection_q, selection_t, color='blue', label='selection_sort')
-    if insertion_q:
-        plt.scatter(insertion_q, insertion_t, color='red', label='insertion_sort')
+    for resultado in resultados:
+        plt.scatter(resultado[0], resultado[1], color=algoritmos_de_ordenacao[resultado.label], label=resultado.label)
 
     plt.xlabel('Quantidade')
     plt.ylabel('Tempo (segundos)')
@@ -64,8 +65,6 @@ def plotar_resultados(resultados):
 
 # Marca o início de toda a tarefa a ser cronometrada.
 inicio_tarefa = time.time()
-algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
-                           insertion_sort.__name__: 'green'}
 resultados = {}
 
 # Leitura dos arquivos de entrada.
@@ -82,7 +81,7 @@ for entrada in entradas_in:
             resultados[algoritmo] = []
         resultados[algoritmo].append(ordenar_e_cronometrar(entrada_array.copy(), eval(algoritmo)))
 
-print("Resultados após a ordenação:", resultados)
+print("Resultados após a ordenação:\n", resultados)
 # plotar_resultados(resultados)
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
