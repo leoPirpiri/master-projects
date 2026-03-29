@@ -3,13 +3,6 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
-# algoritmos de ordenação a serem testados.
-# Antes de inserir o algoritmo de ordenação ao dicionário,
-# certifique-se de que a função do algoritmo de ordenação esteja definida no código.
-# A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
-algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
-                           insertion_sort.__name__: 'green'}
-
 def mostrar_msg_tempo(msg: str, tempo: float):
 	print(f"_____ {msg}: {tempo:.3f} segundos")
 
@@ -45,6 +38,13 @@ def ordenar_e_cronometrar(arr: list, sort_function: callable):
     mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
     # print("Array após a ordenação:", arr)
     return [len(arr), fim_etapa - inicio_etapa]
+
+# algoritmos de ordenação a serem testados.
+# Antes de inserir o algoritmo de ordenação ao dicionário,
+# certifique-se de que a função do algoritmo de ordenação esteja definida no código.
+# A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
+algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
+                           insertion_sort.__name__: 'green'}
 
 def plotar_resultados(resultados):
     if not resultados:
