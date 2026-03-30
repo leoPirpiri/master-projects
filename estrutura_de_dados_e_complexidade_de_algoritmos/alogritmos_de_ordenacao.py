@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
@@ -57,11 +58,16 @@ def plotar_resultados(resultados):
         print("Nenhum resultado para plotar.")
         return
     
+    valores_medios = pd.DataFrame(columns=['nome','quantidade', 'tempo'])
     plt.figure()
+    # Tratamendo dos resultados para plotagem de gráfico de dispersão e valores médios.
     for algoritmo, valores in resultados.items():
-        tratamento_valores = np.array(valores)
-        plt.scatter(tratamento_valores[:, 0], tratamento_valores[:, 1], color=algoritmos_de_ordenacao[algoritmo], label=algoritmo)
+        tratamento_valores = pd.DataFrame(valores, columns=['quantidade', 'tempo'])
+        tratamento_valores['nome'] = algoritmo
+        plt.scatter(tratamento_valores['quantidade'], tratamento_valores['tempo'], color=algoritmos_de_ordenacao[algoritmo], label=algoritmo, s=10)
+        valores_medios = pd.concat([valores_medios, tratamento_valores.groupby(['nome', 'quantidade'])['tempo'].mean().reset_index()], ignore_index=True)
 
+    print("Valores médios por algoritmo:\n", valores_medios)
     plt.xlabel('Quantidade')
     plt.ylabel('Tempo (segundos)')
     plt.title('Comparação de tempo por algoritmo de ordenação')
@@ -89,7 +95,7 @@ for entrada in entradas_in:
         resultados[algoritmo].append(ordenar_e_cronometrar(entrada_array.copy(), eval(algoritmo)))
 
 print("Resultados após a ordenação:\n", resultados)
-# plotar_resultados(resultados)
+plotar_resultados(resultados)
 
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
