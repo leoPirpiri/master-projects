@@ -6,6 +6,20 @@ import matplotlib.pyplot as plt
 def mostrar_msg_tempo(msg: str, tempo: float):
 	print(f"_____ {msg}: {tempo:.3f} segundos")
 
+def ordenar_e_cronometrar(arr: list, sort_function: callable):
+    inicio_etapa = time.time()
+    sort_function(arr)
+    fim_etapa = time.time()
+    mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
+    # print("Array após a ordenação:", arr)
+    return [len(arr), fim_etapa - inicio_etapa]
+
+def ler_numeros_por_linha(caminho):
+    return np.loadtxt(caminho, dtype=int)
+
+# Início do grupo de funções de ordenação
+
+# Insertion Sort
 def insertion_sort(arr):
     n = len(arr)
     for i in range(1, n):
@@ -16,6 +30,7 @@ def insertion_sort(arr):
             j -= 1
         arr[j + 1] = pivo
 
+# Selection Sort
 def selection_sort(arr):
     n = len(arr)
     for i in range(n-1):
@@ -28,20 +43,11 @@ def selection_sort(arr):
             arr[i] = arr[indice_menor]
             arr[indice_menor] = aux
 
-def ler_numeros_por_linha(caminho):
-    return np.loadtxt(caminho, dtype=int)
+# Final do grupo de funções de ordenação
 
-def ordenar_e_cronometrar(arr: list, sort_function: callable):
-    inicio_etapa = time.time()
-    sort_function(arr)
-    fim_etapa = time.time()
-    mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
-    # print("Array após a ordenação:", arr)
-    return [len(arr), fim_etapa - inicio_etapa]
-
-# algoritmos de ordenação a serem testados.
+# Lista de algoritmos de ordenação a serem testados.
 # Antes de inserir o algoritmo de ordenação ao dicionário,
-# certifique-se de que a função do algoritmo de ordenação esteja definida no código.
+# certifique-se de que a função do algoritmo de ordenação esteja anteriormente definida no código.
 # A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
 algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
                            insertion_sort.__name__: 'green'}
@@ -52,8 +58,9 @@ def plotar_resultados(resultados):
         return
     
     plt.figure()
-    for resultado in resultados:
-        plt.scatter(resultado[0], resultado[1], color=algoritmos_de_ordenacao[resultado.label], label=resultado.label)
+    for algoritmo, valores in resultados.items():
+        tratamento_valores = np.array(valores)
+        plt.scatter(tratamento_valores[:, 0], tratamento_valores[:, 1], color=algoritmos_de_ordenacao[algoritmo], label=algoritmo)
 
     plt.xlabel('Quantidade')
     plt.ylabel('Tempo (segundos)')
@@ -83,6 +90,7 @@ for entrada in entradas_in:
 
 print("Resultados após a ordenação:\n", resultados)
 # plotar_resultados(resultados)
+
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
 mostrar_msg_tempo("Tempo de execução total", fim_etapa-inicio_tarefa)
