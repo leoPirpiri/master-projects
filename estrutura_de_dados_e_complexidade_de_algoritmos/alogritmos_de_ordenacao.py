@@ -57,24 +57,60 @@ def plotar_resultados(resultados):
     if not resultados:
         print("Nenhum resultado para plotar.")
         return
-    
     valores_medios = pd.DataFrame(columns=['nome','quantidade', 'tempo'])
-    plt.figure()
-    # Tratamendo dos resultados para plotagem de gráfico de dispersão e valores médios.
+    
     for algoritmo, valores in resultados.items():
         tratamento_valores = pd.DataFrame(valores, columns=['quantidade', 'tempo'])
         tratamento_valores['nome'] = algoritmo
         plt.scatter(tratamento_valores['quantidade'], tratamento_valores['tempo'], color=algoritmos_de_ordenacao[algoritmo], label=algoritmo, s=10)
         valores_medios = pd.concat([valores_medios, tratamento_valores.groupby(['nome', 'quantidade'])['tempo'].mean().reset_index()], ignore_index=True)
-
-    print("Valores médios por algoritmo:\n", valores_medios)
+    
     plt.xlabel('Quantidade')
     plt.ylabel('Tempo (segundos)')
     plt.title('Comparação de tempo por algoritmo de ordenação')
     plt.legend()
-    plt.grid(True)
     plt.tight_layout()
+
+    print("Valores médios por algoritmo:\n", valores_medios)
+    tempos_medios = [
+        valores_medios[valores_medios['quantidade'] == 1001],
+        valores_medios[valores_medios['quantidade'] == 10001],
+        valores_medios[valores_medios['quantidade'] == 100001]]
+
+    if tempos_medios:
+        algorithms = tempos_medios[0]['nome'].tolist()
+        figuras = []
+        for i in range(len(tempos_medios)):
+            fig, ax = plt.subplots()
+            # Labels
+            ax.set_xticks(range(len(algorithms)))
+            ax.set_yticks(range(len(algorithms)))
+            ax.set_xticklabels(algorithms)
+            ax.set_yticklabels(algorithms)
+            ax.xaxis.set_ticks_position('top')
+            ax.xaxis.set_label_position('top')
+            ax.set_title(f"Matriz de Diferença ({tempos_medios[i]['quantidade'].iloc[0]})")
+
+            # Rotacionar eixo X
+            plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
+
+            tempos = np.array(tempos_medios[i]['tempo'])
+            # Matriz de diferença
+            diff = tempos.reshape(-1, 1) - tempos
+            # Heatmap
+            max_abs = np.abs(diff).max()
+            im = ax.imshow(diff, cmap='coolwarm', vmin=-max_abs, vmax=max_abs)
+            plt.tight_layout()
+            figuras.append((ax, diff))
+
+        # Valores dentro das células
+        for i in range(len(algorithms)):
+            for j in range(len(algorithms)):
+                figuras[0][0].text(j, i, f"{figuras[0][1][i, j]:.3f}", ha="center", va="center")
+                figuras[1][0].text(j, i, f"{figuras[1][1][i, j]:.3f}", ha="center", va="center")
+                figuras[2][0].text(j, i, f"{figuras[2][1][i, j]:.3f}", ha="center", va="center")
     plt.show()
+
 
 # Marca o início de toda a tarefa a ser cronometrada.
 inicio_tarefa = time.time()
