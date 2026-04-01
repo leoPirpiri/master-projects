@@ -131,8 +131,8 @@ for entrada in entradas_in:
         resultados[algoritmo].append(ordenar_e_cronometrar(entrada_array.copy(), eval(algoritmo)))
 
 print("Resultados após a ordenação:\n", resultados)
-plotar_resultados(resultados)
-
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
+plotar_resultados(resultados)
+
 mostrar_msg_tempo("Tempo de execução total", fim_etapa-inicio_tarefa)
