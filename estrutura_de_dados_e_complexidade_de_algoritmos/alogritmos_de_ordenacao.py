@@ -44,6 +44,17 @@ def selection_sort(arr):
             arr[i] = arr[indice_menor]
             arr[indice_menor] = aux
 
+def bubble_sort(arr):
+    n = len(arr)
+    while True:
+        trocou = False
+        for i in range(n-1):
+             if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                trocou = True
+        if not trocou:
+            break
+
 # Final do grupo de funções de ordenação
 
 # Lista de algoritmos de ordenação a serem testados.
@@ -51,7 +62,8 @@ def selection_sort(arr):
 # certifique-se de que a função do algoritmo de ordenação esteja anteriormente definida no código.
 # A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
 algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
-                           insertion_sort.__name__: 'green'}
+                           insertion_sort.__name__: 'green',
+                           bubble_sort.__name__: 'blue'}
 
 def plotar_resultados(resultados):
     if not resultados:
@@ -81,34 +93,34 @@ def plotar_resultados(resultados):
         algorithms = tempos_medios[0]['nome'].tolist()
         figuras = []
         for i in range(len(tempos_medios)):
-            fig, ax = plt.subplots()
-            # Labels
-            ax.set_xticks(range(len(algorithms)))
-            ax.set_yticks(range(len(algorithms)))
-            ax.set_xticklabels(algorithms)
-            ax.set_yticklabels(algorithms)
-            ax.xaxis.set_ticks_position('top')
-            ax.xaxis.set_label_position('top')
-            ax.set_title(f"Matriz de Diferença ({tempos_medios[i]['quantidade'].iloc[0]})")
+            if not tempos_medios[i].empty:
+                fig, ax = plt.subplots()
+                # Labels
+                ax.set_xticks(range(len(algorithms)))
+                ax.set_yticks(range(len(algorithms)))
+                ax.set_xticklabels(algorithms)
+                ax.set_yticklabels(algorithms)
+                ax.xaxis.set_ticks_position('top')
+                ax.xaxis.set_label_position('top')
+                ax.set_title(f"Matriz de Diferença ({tempos_medios[i]['quantidade'].iloc[0]})")
 
-            # Rotacionar eixo X
-            plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
+                # Rotacionar eixo X
+                plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
 
-            tempos = np.array(tempos_medios[i]['tempo'])
-            # Matriz de diferença
-            diff = tempos.reshape(-1, 1) - tempos
-            # Heatmap
-            max_abs = np.abs(diff).max()
-            im = ax.imshow(diff, cmap='coolwarm', vmin=-max_abs, vmax=max_abs)
-            plt.tight_layout()
-            figuras.append((ax, diff))
+                tempos = np.array(tempos_medios[i]['tempo'])
+                # Matriz de diferença
+                diff = tempos.reshape(-1, 1) - tempos
+                # Heatmap
+                max_abs = np.abs(diff).max()
+                im = ax.imshow(diff, cmap='coolwarm', vmin=-max_abs, vmax=max_abs)
+                plt.tight_layout()
+                figuras.append((ax, diff))
 
         # Valores dentro das células
         for i in range(len(algorithms)):
             for j in range(len(algorithms)):
-                figuras[0][0].text(j, i, f"{figuras[0][1][i, j]:.3f}", ha="center", va="center")
-                figuras[1][0].text(j, i, f"{figuras[1][1][i, j]:.3f}", ha="center", va="center")
-                figuras[2][0].text(j, i, f"{figuras[2][1][i, j]:.3f}", ha="center", va="center")
+                for k in range(len(figuras)):
+                    figuras[k][0].text(j, i, f"{figuras[k][1][i, j]:.3f}", ha="center", va="center")
     plt.show()
 
 
