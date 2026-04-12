@@ -80,6 +80,7 @@ def plotar_resultados(resultados):
     plt.xlabel('Quantidade')
     plt.ylabel('Tempo (segundos)')
     plt.title('Comparação de tempo por algoritmo de ordenação')
+    plt.grid(True)
     plt.legend()
     plt.tight_layout()
 
