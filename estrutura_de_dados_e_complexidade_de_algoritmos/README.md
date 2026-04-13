@@ -26,6 +26,8 @@
 
 ![Matriz de diferença para tempo médio da execução para entradas pequenas dos 3 primeiros algoritmos estudados](assets/matriz_de_diferenca_pequena_3S.png)
 
-| Arrays de entrada média | Array de entrada grande |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Por exemplo, vemos aqui que a diferença entre o tempo médio de execução do __Insertion sort__ com o __Bubble sort__ é muito forte e evidente, já comparando com __Selection sort__ essa diferença quase não se nota.
+
+| Arrays de entrada média | Arrays de entrada grande |
 | :---: | :---: |
 | ![Matriz de diferença para tempo médio da execução para entradas medias dos 3 primeiros algoritmos estudados](assets/matriz_de_diferenca_media_3S.png) | ![Matriz de diferença para tempo médio da execução para entradas grandes dos 3 primeiros algoritmos estudados](assets/matriz_de_diferenca_grande_3S.png) |
