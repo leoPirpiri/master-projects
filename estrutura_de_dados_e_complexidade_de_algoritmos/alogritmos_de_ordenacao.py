@@ -61,8 +61,8 @@ def bubble_sort(arr):
 # Antes de inserir o algoritmo de ordenação ao dicionário,
 # certifique-se de que a função do algoritmo de ordenação esteja anteriormente definida no código.
 # A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
-algoritmos_de_ordenacao = {selection_sort.__name__: 'red',
-                           insertion_sort.__name__: 'green',
+algoritmos_de_ordenacao = {insertion_sort.__name__: 'green',
+                           selection_sort.__name__: 'red',
                            bubble_sort.__name__: 'blue'}
 
 def plotar_resultados(resultados):
@@ -77,7 +77,7 @@ def plotar_resultados(resultados):
         plt.scatter(tratamento_valores['quantidade'], tratamento_valores['tempo'], color=algoritmos_de_ordenacao[algoritmo], label=algoritmo, s=10)
         valores_medios = pd.concat([valores_medios, tratamento_valores.groupby(['nome', 'quantidade'])['tempo'].mean().reset_index()], ignore_index=True)
     
-    plt.xlabel('Quantidade')
+    plt.xlabel('Tamanho do Array (n)')
     plt.ylabel('Tempo (segundos)')
     plt.title('Comparação de tempo por algoritmo de ordenação')
     plt.grid(True)
@@ -103,7 +103,7 @@ def plotar_resultados(resultados):
                 ax.set_yticklabels(algorithms)
                 ax.xaxis.set_ticks_position('top')
                 ax.xaxis.set_label_position('top')
-                ax.set_title(f"Matriz de Diferença ({tempos_medios[i]['quantidade'].iloc[0]})")
+                ax.set_title(f"Matriz de Diferença (n={tempos_medios[i]['quantidade'].iloc[0]})")
 
                 # Rotacionar eixo X
                 plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
