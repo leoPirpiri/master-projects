@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
+import sys
+
+sys.setrecursionlimit(3000)
 
 def mostrar_msg_tempo(msg: str, tempo: float):
 	print(f"_____ {msg}: {tempo:.3f} segundos")
@@ -12,7 +15,7 @@ def ordenar_e_cronometrar(arr: list, sort_function: callable):
     sort_function(arr)
     fim_etapa = time.time()
     mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
-    # print("Array após a ordenação:", arr)
+    #print("Array após a ordenação:", arr)
     return [len(arr), fim_etapa - inicio_etapa]
 
 def ler_numeros_por_linha(caminho):
@@ -55,15 +58,67 @@ def bubble_sort(arr):
         if not trocou:
             break
 
+def merge_sort(arr):
+    if len(arr) > 1:
+        # 1. Divide: Encontra o meio da lista
+        meio = len(arr) // 2
+        metade_esquerda = arr[:meio]
+        metade_direita = arr[meio:]
+
+        # 2. Recursão: Ordena as duas metades
+        merge_sort(metade_esquerda)
+        merge_sort(metade_direita)
+
+        # 3. Conquista: Mescla as metades de volta
+        i = j = k = 0
+        
+        while i < len(metade_esquerda) and j < len(metade_direita):
+            if metade_esquerda[i] < metade_direita[j]:
+                arr[k] = metade_esquerda[i]
+                i += 1
+            else:
+                arr[k] = metade_direita[j]
+                j += 1
+            k += 1
+
+        # Verifica se sobrou algum elemento em qualquer uma das partes
+        while i < len(metade_esquerda):
+            arr[k] = metade_esquerda[i]
+            i += 1
+            k += 1
+
+        while j < len(metade_direita):
+            arr[k] = metade_direita[j]
+            j += 1
+            k += 1
+
+def quick_sort(arr):
+    # Caso base: listas com 0 ou 1 elemento já estão ordenadas
+    if len(arr) <= 1:
+        return arr
+    else:
+        # Escolhendo o pivô (ex: último elemento)
+        pivo = arr[-1]
+        
+        # Particionamento
+        menores = [x for x in arr[:-1] if x <= pivo]
+        maiores = [x for x in arr[:-1] if x > pivo]
+        
+        # Recursão e Concatenação
+        return quick_sort(menores) + [pivo] + quick_sort(maiores)
+
 # Final do grupo de funções de ordenação
 
 # Lista de algoritmos de ordenação a serem testados.
 # Antes de inserir o algoritmo de ordenação ao dicionário,
 # certifique-se de que a função do algoritmo de ordenação esteja anteriormente definida no código.
 # A cor associada a cada algoritmo é apenas para fins de visualização no gráfico.
-algoritmos_de_ordenacao = {insertion_sort.__name__: 'green',
+algoritmos_de_ordenacao = {quick_sort.__name__: 'purple',
+                           merge_sort.__name__: 'orange',
+                           insertion_sort.__name__: 'green',
                            selection_sort.__name__: 'red',
-                           bubble_sort.__name__: 'blue'}
+                           bubble_sort.__name__: 'blue'
+                           }
 
 def plotar_resultados(resultados):
     if not resultados:
@@ -106,7 +161,7 @@ def plotar_resultados(resultados):
                 ax.set_title(f"Matriz de Diferença (n={tempos_medios[i]['quantidade'].iloc[0]})")
 
                 # Rotacionar eixo X
-                plt.setp(ax.get_xticklabels(), rotation=45, ha='right')
+                plt.setp(ax.get_xticklabels(), rotation=45, ha='left')
 
                 tempos = np.array(tempos_medios[i]['tempo'])
                 # Matriz de diferença
@@ -135,7 +190,7 @@ entradas_in = [f for f in os.listdir(diretorio) if f.endswith('.in')]
 for entrada in entradas_in:
     inicio_leitura = time.time()
     entrada_array = ler_numeros_por_linha(f'{diretorio}{entrada}')
-    #print("Array antes da ordenação:", entrada_array)
+    print("Array antes da ordenação:", entrada_array)
     mostrar_msg_tempo("Tempo de leitura de dados", time.time() - inicio_leitura)
 
     for algoritmo in algoritmos_de_ordenacao.keys():
