@@ -1,4 +1,4 @@
-# Análise de tempo em algoritmos de ordenação
+# Unidade 1 - Análise de tempo em algoritmos de ordenação
 
 * [Primeira atividade](#algoritmos-de-ordem-quadrática-on) (Selection Sort, Insertion Sort e Bubble Sort)
 
@@ -72,3 +72,18 @@
 | Arrays de entrada média | Arrays de entrada grande |
 | :---: | :---: |
 | ![Matriz de diferença para tempo médio da execução para entradas medias dos 5 primeiros algoritmos estudados](assets/matriz_de_diferenca_media_5S.png) | ![Matriz de diferença para tempo médio da execução para entradas grandes dos 5 primeiros algoritmos estudados](assets/matriz_de_diferenca_grande_5S.png) |
+
+# Unidade 2 - Análise de algoritmos gulosos 
+
+* [Primeira atividade](#árvore-de-espalhamento-e-caminho-mínimo) (Kruskal & Prim)
+
+* [Segunda atividade](#problema-da-mochila-inteira) (Problema da mochila)
+
+## Árvore de espalhamento e caminho mínimo
+
+  ### Problema da árvore de espalhamento mínimo
+
+  ### Problema do caminho mínimo
+
+## Problema da mochila inteira
+
