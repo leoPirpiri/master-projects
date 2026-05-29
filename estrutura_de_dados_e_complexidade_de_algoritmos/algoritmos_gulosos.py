@@ -73,8 +73,8 @@ for entrada in entradas_txt:
 
     mst, custo = kruskal(n, arestas)
 
-    print("Arestas da Árvore Geradora Mínima:")
+    print(f"\nArestas da Árvore Geradora Mínima:")
     for u, v, peso in mst:
         print(f"{u} <-> {v} = {peso}")
 
-    print(f"Total = {custo}")
+    print(f"Custo total = {custo}")
