@@ -81,7 +81,11 @@
 
 ## Árvore de espalhamento e caminho mínimo
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O problema que devemos atentar para as várias abordagens usando algoritmos gulosos é a quantidade de vértices, pois, na tentativa de achar a solução ótima, aumentamos muito o custo de processamento e memória. 
+
   ### Problema da árvore de espalhamento mínimo
+  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O algoritmo de Kruskal utiliza uma abordagem gulosa para selecionar as arestas de menor peso, garantindo que não haja ciclos durante a construção da árvore. Isso permite encontrar uma solução ótima para o problema da árvore geradora mínima de forma eficiente, sendo bastante utilizado em problemas de redes e otimização.
 
   ### Problema do caminho mínimo
 
