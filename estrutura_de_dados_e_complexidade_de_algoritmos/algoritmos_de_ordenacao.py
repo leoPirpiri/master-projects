@@ -15,7 +15,7 @@ def ordenar_e_cronometrar(arr: list, sort_function: callable):
     sort_function(arr)
     fim_etapa = time.time()
     mostrar_msg_tempo("Tempo de ordenação " + sort_function.__name__, fim_etapa - inicio_etapa)
-    #print("Array após a ordenação:", arr)
+    # print("Array após a ordenação:", arr)
     return [len(arr), fim_etapa - inicio_etapa]
 
 def ler_numeros_por_linha(caminho):
@@ -198,7 +198,7 @@ for entrada in entradas_in:
             resultados[algoritmo] = []
         resultados[algoritmo].append(ordenar_e_cronometrar(entrada_array.copy(), eval(algoritmo)))
 
-print("Resultados após a ordenação:\n", resultados)
+# print("Resultados após a ordenação:\n", resultados)
 # Marca o fim da tarefa e mostra o tempo.
 fim_etapa = time.time()
 plotar_resultados(resultados)
