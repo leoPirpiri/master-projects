@@ -81,13 +81,33 @@
 
 ## Árvore de espalhamento e caminho mínimo
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O problema que devemos atentar para as várias abordagens usando algoritmos gulosos é a quantidade de vértices, pois, na tentativa de achar a solução ótima, aumentamos muito o custo de processamento e memória. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Algoritmos gulosos (Greedy Algorithms) constroem uma solução passo a passo, escolhendo em cada etapa a opção que parece ser a melhor decisão local naquele momento. O problema que devemos atentar para as várias abordagens usando essa estratégia é a quantidade de vértices, pois, na tentativa de achar a solução ótima, aumentamos muito o custo de processamento e memória. 
 
-  ### Problema da árvore de espalhamento mínimo
+  ### Problema da árvore de espalhamento mínimo (**Kruskal**, **Prim**)
   
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O algoritmo de Kruskal utiliza uma abordagem gulosa para selecionar as arestas de menor peso, garantindo que não haja ciclos durante a construção da árvore. Isso permite encontrar uma solução ótima para o problema da árvore geradora mínima de forma eficiente, sendo bastante utilizado em problemas de redes e otimização.
+  
+  **Complexidade:** O(E log V)[^2]
+[^2]: Onde V e E são, respectivamente, os conjuntos/quantidades de vértices e arestas do grafo.
+  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O algoritmo de Prim também encontra uma **Árvore Geradora Mínima**, porém utilizando uma abordagem diferente. A árvore é expandida gradualmente a partir de um vértice inicial, sempre escolhendo a aresta de menor custo que conecta um vértice já visitado a um vértice ainda não visitado.
+  
+  **Complexidade:** O(E log E)[^2]
 
-  ### Problema do caminho mínimo
+  ### Problema do caminho mínimo (**Dijkstra**)
+  
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para o problema do Caminho Mínimo utilizamos o algoritmo de Dijkstra. Em cada passo, o vértice com menor distância conhecida é selecionado e suas arestas são relaxadas para atualizar possíveis caminhos mais curtos.
+
+  **Complexidade:** O(E log V)[^2]
+
+### Comparação
+
+  | Algoritmo | Problema Resolvido     | Permite Pesos Negativos |
+  | --------- | ---------------------- | ----------------------- |
+  | Kruskal   | Árvore Geradora Mínima | Sim                     |
+  | Prim      | Árvore Geradora Mínima | Sim                     |
+  | Dijkstra  | Caminho Mínimo         | Não                     |
 
 ## Problema da mochila inteira
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (em construção)
