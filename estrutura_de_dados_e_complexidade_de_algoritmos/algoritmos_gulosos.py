@@ -52,7 +52,7 @@ def prim(n, arestas):
         # print(f"{parent[i] + 1} <-> {i + 1}    : {adj_matrix[i][parent[i]]}")
         total_weight += adj_matrix[i][parent[i]]
         
-    print(f"\Custo total utilizando Prim: {total_weight}")
+    print(f"Custo total utilizando Prim = {total_weight}")
 
 class UnionFind:
     def __init__(self, n):
