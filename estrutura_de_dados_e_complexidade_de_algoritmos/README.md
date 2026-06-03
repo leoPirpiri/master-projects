@@ -96,7 +96,7 @@
 
   ### Problema do caminho mínimo (**Dijkstra**)
   
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para o problema do Caminho Mínimo utilizamos o algoritmo de Dijkstra. Em cada passo, o vértice com menor distância conhecida é selecionado e suas arestas são relaxadas para atualizar possíveis caminhos mais curtos.
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para o problema do Caminho Mínimo, utilizamos o algoritmo de Dijkstra. Em cada passo, o vértice com menor distância conhecida é selecionado e suas arestas são relaxadas para atualizar possíveis caminhos mais curtos.
 
   **Complexidade:** O(E log V)[^2]
 
@@ -110,4 +110,8 @@
 
 ## Problema da mochila inteira
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (em construção)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O problema da Mochila 0-1 consiste em selecionar um subconjunto de itens (peso, valor) para maximizar o valor total transportado sem ultrapassar a capacidade da mochila. Cada item pode ser escolhido apenas uma vez (0 ou 1). É um problema clássico de otimização resolvido por Programação Dinâmica (DP)
+* Estrutura de Dados: Uma tabela bidimensional dp de tamanho (n + 1) x (M + 1) armazena as soluções dos subproblemas.
+* Complexidade de Tempo: O algoritmo roda em tempo O(n x M).
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Após realizar os testes com as entradas simples e confirmar que o algoritmo funcionava, testamos o algoritmo feito com as entradas disponibilizadas na atividade e pode-se notar uma demora ao mostrar os resultado. Usando um meio para cronometrar o tempo na construção da tabela, mostra-se um aumento de tempo considerável nesta construção, isso devido ao aumento da capacidade da mochila. 
