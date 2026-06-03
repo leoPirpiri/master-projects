@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 import os
 import heapq
 
@@ -114,7 +112,7 @@ def dijkstra(grafo, origem):
 
 
 diretorio = './instancias-num/' # Diretório atual
-entradas_txt = [f for f in os.listdir(diretorio) if f.endswith('.txt')]
+entradas_txt = [f for f in os.listdir(diretorio) if f.startswith('.dij') and f.endswith('.txt')]
 for entrada in entradas_txt:
     entrada_grafo = open(f'{diretorio}{entrada}', 'r').readlines()
     print(f"\nProcessando o grafo do arquivo: {entrada}")
