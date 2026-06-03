@@ -120,4 +120,4 @@
 ![Resultados após execução da PD sobre o problema da mochila](assets/tempo_construcao_matriz_pd.png)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Isso mostra que para instâncias onde a capacidade da mochila assume valores massivos, o custo computacional de tempo e de memória[^3] pode se tornar um gargalo substancial.
-[^3]: Os teste com alocação de memória não foram realizados nesta atividade, mas é um bom ponto a se pensar no futuro.
+[^3]: Os teste de medição da alocação de memória não foram realizados nesta atividade, mas é um bom ponto a se pensar no futuro.
