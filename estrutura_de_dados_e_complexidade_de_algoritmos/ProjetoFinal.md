@@ -32,7 +32,7 @@ $H = \frac{1}{2} \sum_{i=1}^{n} s_i$
 → Queremos encontrar um subconjunto cuja soma seja exatamente **H**.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A redução acontece quando construímos a mochila assim:[^1]
-[^1]: Essa transformação acontece em $O(n)$, sendo linear, logo o problema continua sendo polinomial.
+[^1]: Essa transformação acontece em O(n), sendo linear, logo o problema continua sendo polinomial.
 
 - Itens: criamos $n$ itens correspondentes aos $n$ elementos de $s_i$.
 - Valores ($v_i$): o valor de cada item $i$ é igual ao seu tamanho: $v_i = s_i$.
@@ -40,7 +40,8 @@ $H = \frac{1}{2} \sum_{i=1}^{n} s_i$
 - Capacidade da mochila ($C$): definimos a capacidade como a metade da soma total: $C = H$.
 - Meta de valor ($V$): queremos alcançar um valor total de pelo menos $V = H$.
 
-![Redutibilidade NP-difícil](assets/redutibilidade_de_problema.png) → Por definição, dizemos que um problema de decisão $\pi_1$ (Problema da mochila) é redutível a outro problema de decisão $\pi_2$ (Problema da Partição) se, e somente se, uma instância de $\pi_2$ puder ser obtida em tempo polinomial a partir de uma instância de $\pi_1$ tal que, resolvendo $\pi_2$, estaremos resolvendo $\pi_1$.
+![Redutibilidade NP-difícil](assets/redutibilidade_de_problema.png)
+→ Por definição, dizemos que um problema de decisão $\pi_1$ (Problema da mochila) é redutível a outro problema de decisão $\pi_2$ (Problema da Partição) se, e somente se, uma instância de $\pi_2$ puder ser obtida em tempo polinomial a partir de uma instância de $\pi_1$ tal que, resolvendo $\pi_2$, estaremos resolvendo $\pi_1$.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assim, temos: 1 → Se o Problema da Partição tem uma solução $S_1$ (subconjunto de $S$), a soma dos seus elementos é $H$. Ao colocar os itens correspondentes de $S_1$ na mochila, o peso total será exatamente $C = H$ e o valor total será exatamente $V = H$. Logo, a mochila tem solução. 2 → Se o Problema da Mochila tem uma solução com valor maior ou igual a $H$ e peso menor ou igual a $H$, como os valores são iguais aos pesos, o peso e o valor da mochila devem ser exatamente $H$. Os itens escolhidos formam o subconjunto $S_1$, e os itens deixados de fora formam $S_2$, ambos somando exatamente $H$. Logo, a partição é válida.
 
